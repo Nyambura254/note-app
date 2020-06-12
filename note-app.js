@@ -68,83 +68,129 @@
 // document.querySelector("body").appendChild(newParagraph);
 
 
-var notes = [];
+
+
+
+
+
+
+
+
+
+
+
+// var notes = [];
+
+// var filters = {
+//     searchText: "",
+// };
+// // Check for existing saved data
+// var notesJSON = localStorage.getItem("notes");
+
+// if (notesJSON !== null) {
+//     notes = JSON.parse(notesJSON);
+// }
+
+// var removeNote = function(id) {
+//     var noteIndex = notes.findIndex(function(note) {
+//         return note.id === id;
+//     });
+
+//     if (noteIndex > -1) {
+//         notes.splice(noteIndex, 1);
+//     }
+// };
+
+// // Generate the DOM structure for a note
+// var generateNoteDOM = function(note) {
+//     var noteEl = document.createElement("div");
+//     var textEl = document.createElement("span");
+//     var button = document.createElement("button");
+
+//     // Setup the remove note button
+//     button.textContent = "x";
+//     noteEl.appendChild(button);
+//     button.addEventListener("click", function() {
+//         removeNote(note.id);
+//         saveNotes(notes);
+//         renderNotes(notes, filters);
+//     });
+
+//     if (note.title.length > 0) {
+//         textEl.textContent = note.title;
+//     } else {
+//         textEl.textContent = "No title";
+//     }
+//     noteEl.appendChild(textEl);
+
+//     return noteEl;
+// };
+
+// var saveNotes = function(notes) {
+//     localStorage.setItem("notes", JSON.stringify(notes));
+// };
+
+// var renderNotes = function(notesData, filtersData) {
+//     var filteredNotes = notesData.filter(function(note) {
+//         return note.title
+//             .toLowerCase()
+//             .includes(filtersData.searchText.toLowerCase());
+//     });
+
+//     document.querySelector("#notes").innerHTML = "";
+
+//     filteredNotes.forEach(function(note) {
+//         var noteEl = generateNoteDOM(note);
+//         document.querySelector("#notes").appendChild(noteEl);
+//     });
+// };
+
+// renderNotes(notes, filters);
+
+// // click button (create note)
+// document.querySelector("#create-note").addEventListener("click", (evt) => {
+//     notes.push({
+//         id: uuid(),
+//         title: "",
+//         body: "",
+//     });
+//     saveNotes(notes);
+//     renderNotes(notes, filters);
+// });
+
+// document.querySelector("#search-text").addEventListener("input", (evt) => {
+//     filters.searchText = evt.target.value;
+//     renderNotes(notes, filters);
+// });
+
+
+
+
+
+
+
+
+
+
+// step 3
+var notes = getSavedNotes();
 
 var filters = {
     searchText: "",
-};
-// Check for existing saved data
-var notesJSON = localStorage.getItem("notes");
-
-if (notesJSON !== null) {
-    notes = JSON.parse(notesJSON);
-}
-
-var removeNote = function(id) {
-    var noteIndex = notes.findIndex(function(note) {
-        return note.id === id;
-    });
-
-    if (noteIndex > -1) {
-        notes.splice(noteIndex, 1);
-    }
-};
-
-// Generate the DOM structure for a note
-var generateNoteDOM = function(note) {
-    var noteEl = document.createElement("div");
-    var textEl = document.createElement("span");
-    var button = document.createElement("button");
-
-    // Setup the remove note button
-    button.textContent = "x";
-    noteEl.appendChild(button);
-    button.addEventListener("click", function() {
-        removeNote(note.id);
-        saveNotes(notes);
-        renderNotes(notes, filters);
-    });
-
-    if (note.title.length > 0) {
-        textEl.textContent = note.title;
-    } else {
-        textEl.textContent = "No title";
-    }
-    noteEl.appendChild(textEl);
-
-    return noteEl;
-};
-
-var saveNotes = function(notes) {
-    localStorage.setItem("notes", JSON.stringify(notes));
-};
-
-var renderNotes = function(notesData, filtersData) {
-    var filteredNotes = notesData.filter(function(note) {
-        return note.title
-            .toLowerCase()
-            .includes(filtersData.searchText.toLowerCase());
-    });
-
-    document.querySelector("#notes").innerHTML = "";
-
-    filteredNotes.forEach(function(note) {
-        var noteEl = generateNoteDOM(note);
-        document.querySelector("#notes").appendChild(noteEl);
-    });
 };
 
 renderNotes(notes, filters);
 
 // click button (create note)
 document.querySelector("#create-note").addEventListener("click", (evt) => {
+    var id = uuid();
     notes.push({
-        id: uuid(),
+        id: id,
         title: "",
         body: "",
     });
     saveNotes(notes);
-    renderNotes(notes, filters);
+    location.assign(`/edit.html#${id}`)
 });
 
 document.querySelector("#search-text").addEventListener("input", (evt) => {
