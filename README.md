@@ -1,5 +1,5 @@
 # note-app
-javascript implementation on various events
+javascript implementation on various events using DOM
 
 
 i have created two note apps
